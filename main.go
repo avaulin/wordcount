@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -12,8 +11,11 @@ func main() {
 	if err != nil {
 		fail(err)
 	}
+	if src == "" {
+		fmt.Println(0)
+		return
+	}
 	words := strings.Split(src, " ")
-
 	fmt.Println(len(words))
 }
 
@@ -21,7 +23,7 @@ func main() {
 // from command line arguments and returns them.
 func readInput() (src string, err error) {
 	if len(os.Args) <= 1 {
-		fail(errors.New("missing pattern"))
+		return "", err
 	}
 	return os.Args[1], nil
 }
